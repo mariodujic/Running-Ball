@@ -12,7 +12,7 @@ public class BallColor : MonoBehaviour
         SetSharedColor(ballColor);
     }
 
-    public void SetSharedColor(Color ballColor)
+    private void SetSharedColor(Color ballColor)
     {
         MeshRenderer sphereRenderer = GetComponent<MeshRenderer>();
         if (sphereRenderer != null)
