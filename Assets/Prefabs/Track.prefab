@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5764148909294717108}
   - component: {fileID: 5764148909294717111}
   - component: {fileID: 5764148909294717110}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 5764148909675735949}
   - component: {fileID: 5764148909675735948}
   - component: {fileID: 5764148909675735951}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StripeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 5764148909951620941}
   - component: {fileID: 5764148909951620940}
   - component: {fileID: 5764148909951620943}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StripeR L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5764148910615476139}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}

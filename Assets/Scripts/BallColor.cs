@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BallColor : MonoBehaviour
@@ -5,11 +7,15 @@ public class BallColor : MonoBehaviour
     public BallColorType selectedColor;
     public string trailObjectName = "Trail";
     public string glowObjectName = "Glow";
+    
+    private float originalEmissionRate;
+    private float originalSizeMultiplier;
 
     private void Start()
     {
         Color ballColor = SharedColors.GetSelectedColor(selectedColor);
         SetSharedColor(ballColor);
+        StoreStartGlowValues();
     }
 
     private void SetSharedColor(Color ballColor)
@@ -72,5 +78,32 @@ public class BallColor : MonoBehaviour
                 main.startColor = new ParticleSystem.MinMaxGradient(newGradient);
             }
         }
+    }
+
+    private void StoreStartGlowValues()
+    {
+        Transform glowObject = transform.Find(glowObjectName);
+        ParticleSystem glowParticleSystem = glowObject.GetComponent<ParticleSystem>();
+        var emission = glowParticleSystem.emission;
+        var main = glowParticleSystem.main;
+
+        originalEmissionRate = emission.rateOverTimeMultiplier;
+        originalSizeMultiplier = main.startSizeMultiplier;
+    }
+    
+    public IEnumerator FlashGlow(float emissionRate, float sizeMultiplier, float duration)
+    {
+        Transform glowObject = transform.Find(glowObjectName);
+        ParticleSystem glowParticleSystem = glowObject.GetComponent<ParticleSystem>();
+        var emission = glowParticleSystem.emission;
+        var main = glowParticleSystem.main;
+
+        emission.rateOverTimeMultiplier = emissionRate;
+        main.startSizeMultiplier = originalSizeMultiplier * sizeMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        emission.rateOverTimeMultiplier = originalEmissionRate;
+        main.startSizeMultiplier = originalSizeMultiplier;
     }
 }
