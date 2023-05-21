@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class BallVerticalMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SharedBallColors : MonoBehaviour
+public class BallColor : MonoBehaviour
 {
     public Color ballColor;
     public string trailObjectName = "Trail";
