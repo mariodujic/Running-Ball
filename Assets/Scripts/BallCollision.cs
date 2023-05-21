@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallCollision : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class BallCollision : MonoBehaviour
                 if (color == ballColor)
                 {
                     Destroy(collider.gameObject);
+                }
+                else
+                {
+                    string activeSceneName = SceneManager.GetActiveScene().name;
+                    SceneManager.LoadScene(activeSceneName);
                 }
             }
         }
