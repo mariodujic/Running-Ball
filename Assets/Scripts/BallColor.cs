@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class BallColor : MonoBehaviour
 {
-    public Color ballColor;
+    public BallColorType selectedColor;
     public string trailObjectName = "Trail";
     public string glowObjectName = "Glow";
 
     private void Start()
     {
+        Color ballColor = SharedColors.GetSelectedColor(selectedColor);
         SetSharedColor(ballColor);
     }
 
