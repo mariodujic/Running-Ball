@@ -22,10 +22,9 @@ public class BallCollision : MonoBehaviour
     {
         
         StartCoroutine(ballColor.FlashGlow(increasedGlowEmissionRate, glowSizeMultiplier, glowFlashDuration));
-        
         if (collider.CompareTag("CollectableSphere"))
         {
-            
+   
             Renderer ballRenderer = gameObject.GetComponent<Renderer>();
             Renderer renderer = collider.gameObject.GetComponent<Renderer>();
             if (renderer != null)
