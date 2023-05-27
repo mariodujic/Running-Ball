@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SharedColors : MonoBehaviour
@@ -19,6 +20,12 @@ public class SharedColors : MonoBehaviour
             default:
                 return SharedColors.yellow;
         }
+    }
+
+    public static BallColorType GetRandomColorType()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(BallColorType)).Length); 
+        return (BallColorType)randomIndex;
     }
 }
 

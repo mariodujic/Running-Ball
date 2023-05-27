@@ -9,7 +9,7 @@ public class CollectableGenerator : MonoBehaviour
     public GameObject sphereCollectable;
     public int sphereCount = 10;
     public float sphereSpacing = 5f;
-
+    
     void Start()
     {
         StartCoroutine(GenerateObjects());
@@ -26,8 +26,12 @@ public class CollectableGenerator : MonoBehaviour
             float distance = i * stepSize;
             Vector3 position = vertexPath.GetPointAtDistance(distance, PathCreation.EndOfPathInstruction.Stop);
             position.y += 0.1f;
-            Instantiate(sphereCollectable, position, Quaternion.identity);
+            GameObject instantiatedSphere = Instantiate(sphereCollectable, position, Quaternion.identity);
+            CollectableColor collectableColor = instantiatedSphere.GetComponent<CollectableColor>();
+            BallColorType colorType = SharedColors.GetRandomColorType();
+            collectableColor.SetSharedColor(colorType);
         }
         yield return null;
     }
+
 }
