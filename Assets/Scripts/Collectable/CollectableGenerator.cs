@@ -9,6 +9,7 @@ public class CollectableGenerator : MonoBehaviour
     public GameObject sphereCollectable;
     public int sphereCount = 10;
     public float sphereSpacing = 5f;
+    public float offsetDistance = 1f;
     
     void Start()
     {
@@ -25,7 +26,22 @@ public class CollectableGenerator : MonoBehaviour
         {
             float distance = i * stepSize;
             Vector3 position = vertexPath.GetPointAtDistance(distance, PathCreation.EndOfPathInstruction.Stop);
+            Vector3 pathDirection = pathCreator.path.GetDirectionAtDistance(distance);
             position.y += 0.1f;
+
+            int currentPosition = UnityEngine.Random.Range(0, 3);
+            print(currentPosition);
+            switch (currentPosition)
+            {
+                case 0:
+                    position += Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+                    break;
+                case 2:
+                    position -= Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+                    break;
+                default:
+                    break;
+            }
             GameObject instantiatedSphere = Instantiate(sphereCollectable, position, Quaternion.identity);
             CollectableColor collectableColor = instantiatedSphere.GetComponent<CollectableColor>();
             BallColorType colorType = SharedColors.GetRandomColorType();
