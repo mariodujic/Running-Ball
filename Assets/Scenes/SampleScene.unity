@@ -755,6 +755,7 @@ GameObject:
   - component: {fileID: 763407097}
   - component: {fileID: 763407096}
   - component: {fileID: 763407099}
+  - component: {fileID: 763407100}
   m_Layer: 0
   m_Name: Road Mesh Holder
   m_TagString: Untagged
@@ -842,6 +843,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 933281936}
+--- !u!64 &763407100
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763407095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 687289816}
 --- !u!1 &854585647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6011,7 +6026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933281936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: -0.0069999993}
+  m_LocalPosition: {x: 0.844, y: 0.1, z: -0.0069999993}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6098,6 +6113,8 @@ MonoBehaviour:
   pathCreator: {fileID: 903783401}
   speed: 4
   offsetDistance: 0.3
+  lateralSpeed: 5
+  positionTolerance: 0.01
 --- !u!1 &1123810231
 GameObject:
   m_ObjectHideFlags: 0

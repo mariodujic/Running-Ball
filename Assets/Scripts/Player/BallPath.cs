@@ -5,9 +5,11 @@ public class BallPath : MonoBehaviour
 {
     public PathCreator pathCreator;
     public float speed = 5;
+    public float offsetDistance = 1f;
+    public float lateralSpeed = 5f;
+    private Vector3 velocity = Vector3.zero;
     private float distanceTravelled;
     private int currentPosition = 1; // 0: Left, 1: Middle, 2: Right
-    public float offsetDistance = 1f;
 
     void Update()
     {
@@ -25,18 +27,20 @@ public class BallPath : MonoBehaviour
             currentPosition++;
         }
 
+        Vector3 targetPosition = position;
+
         switch (currentPosition)
         {
             case 0:
-                position += Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+                targetPosition += Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
                 break;
             case 2:
-                position -= Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+                targetPosition -= Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
                 break;
             default:
                 break;
         }
 
-        transform.position = position;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, lateralSpeed * Time.deltaTime);
     }
 }
