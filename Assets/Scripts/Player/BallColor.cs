@@ -8,18 +8,21 @@ public class BallColor : MonoBehaviour
     public string trailObjectName = "Trail";
     public string glowObjectName = "Glow";
     public string sparklesObjectName = "Sparkles";
-    private Transform sparkleObject;
-    
+    private Transform trailObject;
+    private Transform glowObject;
+    private Transform sparklesObject;
     private float originalEmissionRate;
     private float originalSizeMultiplier;
 
     private void Start()
     {
+        trailObject = transform.Find(trailObjectName);
+        glowObject = transform.Find(glowObjectName);
+        sparklesObject = transform.Find(sparklesObjectName);
+        
         Color ballColor = SharedColors.GetSelectedColor(selectedColor);
         SetSharedColor(ballColor);
         StoreStartGlowValues();
-
-        sparkleObject = transform.Find(sparklesObjectName);
     }
 
     private void SetSharedColor(Color ballColor)
@@ -29,8 +32,6 @@ public class BallColor : MonoBehaviour
         {
             sphereRenderer.material.color = ballColor;
         }
-
-        Transform trailObject = transform.Find(trailObjectName);
 
         if (trailObject != null)
         {
@@ -56,8 +57,6 @@ public class BallColor : MonoBehaviour
             }
         }
 
-        Transform glowObject = transform.Find(glowObjectName);
-
         if (glowObject != null)
         {
             ParticleSystem glowParticleSystem = glowObject.GetComponent<ParticleSystem>();
@@ -82,11 +81,35 @@ public class BallColor : MonoBehaviour
                 main.startColor = new ParticleSystem.MinMaxGradient(newGradient);
             }
         }
+
+        if (sparklesObject != null)
+        {
+            ParticleSystem sparklesParticleSystem = sparklesObject.GetComponent<ParticleSystem>();
+            if (sparklesParticleSystem != null)
+            {
+                GradientColorKey[] colorKeys = new GradientColorKey[2];
+                colorKeys[0].color = ballColor;
+                colorKeys[0].time = 0f;
+                colorKeys[1].color = ballColor;
+                colorKeys[1].time = 1f;
+
+                GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+                alphaKeys[0].alpha = 0f;
+                alphaKeys[0].time = 0f;
+                alphaKeys[1].alpha = 1f;
+                alphaKeys[1].time = 1f;
+
+                Gradient newGradient = new Gradient();
+                newGradient.SetKeys(colorKeys, alphaKeys);
+
+                var main = sparklesParticleSystem.main;
+                main.startColor = new ParticleSystem.MinMaxGradient(newGradient);
+            }
+        }
     }
 
     private void StoreStartGlowValues()
     {
-        Transform glowObject = transform.Find(glowObjectName);
         ParticleSystem glowParticleSystem = glowObject.GetComponent<ParticleSystem>();
         var emission = glowParticleSystem.emission;
         var main = glowParticleSystem.main;
@@ -97,7 +120,6 @@ public class BallColor : MonoBehaviour
     
     public IEnumerator FlashGlow(float emissionRate, float sizeMultiplier, float duration)
     {
-        Transform glowObject = transform.Find(glowObjectName);
         ParticleSystem glowParticleSystem = glowObject.GetComponent<ParticleSystem>();
         var emission = glowParticleSystem.emission;
         var main = glowParticleSystem.main;
@@ -110,9 +132,9 @@ public class BallColor : MonoBehaviour
         emission.rateOverTimeMultiplier = originalEmissionRate;
         main.startSizeMultiplier = originalSizeMultiplier;
 
-        if (sparkleObject != null)
+        if (sparklesObject != null)
         {
-            ParticleSystem sparkleParticleSystem = sparkleObject.GetComponent<ParticleSystem>();
+            ParticleSystem sparkleParticleSystem = sparklesObject.GetComponent<ParticleSystem>();
             if (sparkleParticleSystem != null)
             {
                 sparkleParticleSystem.Play();
