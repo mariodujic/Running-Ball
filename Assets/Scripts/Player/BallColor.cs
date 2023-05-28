@@ -7,6 +7,8 @@ public class BallColor : MonoBehaviour
     public BallColorType selectedColor;
     public string trailObjectName = "Trail";
     public string glowObjectName = "Glow";
+    public string sparklesObjectName = "Sparkles";
+    private Transform sparkleObject;
     
     private float originalEmissionRate;
     private float originalSizeMultiplier;
@@ -16,6 +18,8 @@ public class BallColor : MonoBehaviour
         Color ballColor = SharedColors.GetSelectedColor(selectedColor);
         SetSharedColor(ballColor);
         StoreStartGlowValues();
+
+        sparkleObject = transform.Find(sparklesObjectName);
     }
 
     private void SetSharedColor(Color ballColor)
@@ -105,5 +109,14 @@ public class BallColor : MonoBehaviour
 
         emission.rateOverTimeMultiplier = originalEmissionRate;
         main.startSizeMultiplier = originalSizeMultiplier;
+
+        if (sparkleObject != null)
+        {
+            ParticleSystem sparkleParticleSystem = sparkleObject.GetComponent<ParticleSystem>();
+            if (sparkleParticleSystem != null)
+            {
+                sparkleParticleSystem.Play();
+            }
+        }
     }
 }
