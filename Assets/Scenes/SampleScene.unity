@@ -6112,9 +6112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 903783401}
   speed: 4
-  offsetDistance: 0.3
   lateralSpeed: 5
-  positionTolerance: 0.01
 --- !u!1 &1123810231
 GameObject:
   m_ObjectHideFlags: 0
@@ -6148,7 +6146,6 @@ MonoBehaviour:
   sphereCollectable: {fileID: 282225353}
   sphereCount: 30
   sphereSpacing: 5
-  offsetDistance: 0.3
 --- !u!4 &1123810233
 Transform:
   m_ObjectHideFlags: 0
@@ -6277,7 +6274,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464574540}
   serializedVersion: 8
-  lengthInSec: 0.1
+  lengthInSec: 0.25
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -6287,8 +6284,8 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  useUnscaledTime: 0
-  autoRandomSeed: 0
+  useUnscaledTime: 1
+  autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -6405,7 +6402,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1.4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6521,7 +6518,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.01
+      scalar: 0.0125
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6837,7 +6834,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 1
-    maxNumParticles: 1000
+    maxNumParticles: 5000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 1
@@ -6901,7 +6898,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0
+    radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -7041,7 +7038,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 0
+      value: 1
       mode: 0
       spread: 1
       speed:
@@ -8313,7 +8310,7 @@ ParticleSystem:
     m_Curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -10049,7 +10046,7 @@ ParticleSystem:
       emitProbability: 1
   LightsModule:
     enabled: 0
-    ratio: 0
+    ratio: 1
     light: {fileID: 0}
     randomDistribution: 1
     color: 1
