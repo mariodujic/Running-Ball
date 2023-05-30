@@ -5,11 +5,10 @@ public class BallPath : MonoBehaviour
 {
     public PathCreator pathCreator;
     public float speed = 5;
-    public float offsetDistance = 1f;
     public float lateralSpeed = 5f;
     private Vector3 velocity = Vector3.zero;
     private float distanceTravelled;
-    private int currentPosition = 1; // 0: Left, 1: Middle, 2: Right
+    private HorizontalPosition currentPosition = HorizontalPosition.Center;
 
     void Update()
     {
@@ -18,11 +17,11 @@ public class BallPath : MonoBehaviour
         Vector3 pathDirection = pathCreator.path.GetDirectionAtDistance(distanceTravelled);
         position.y += 0.1f;
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition > 0)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition > HorizontalPosition.Left)
         {
             currentPosition--;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition < 2)
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition < HorizontalPosition.Right)
         {
             currentPosition++;
         }
@@ -31,11 +30,11 @@ public class BallPath : MonoBehaviour
 
         switch (currentPosition)
         {
-            case 0:
-                targetPosition += Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+            case HorizontalPosition.Left:
+                targetPosition -= Vector3.Cross(pathDirection, Vector3.up) * HorizontalPositionOffset.Left;
                 break;
-            case 2:
-                targetPosition -= Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+            case HorizontalPosition.Right:
+                targetPosition -= Vector3.Cross(pathDirection, Vector3.up) * HorizontalPositionOffset.Right;
                 break;
             default:
                 break;

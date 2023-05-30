@@ -9,7 +9,6 @@ public class CollectableGenerator : MonoBehaviour
     public GameObject sphereCollectable;
     public int sphereCount = 10;
     public float sphereSpacing = 5f;
-    public float offsetDistance = 1f;
     
     void Start()
     {
@@ -29,15 +28,15 @@ public class CollectableGenerator : MonoBehaviour
             Vector3 pathDirection = pathCreator.path.GetDirectionAtDistance(distance);
             position.y += 0.1f;
 
-            int currentPosition = UnityEngine.Random.Range(0, 3);
-            print(currentPosition);
+            HorizontalPosition currentPosition = (HorizontalPosition) UnityEngine.Random.Range(0, 3);
+            
             switch (currentPosition)
             {
-                case 0:
-                    position += Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+                case HorizontalPosition.Left:
+                    position -= Vector3.Cross(pathDirection, Vector3.up) * HorizontalPositionOffset.Left;
                     break;
-                case 2:
-                    position -= Vector3.Cross(pathDirection, Vector3.up) * offsetDistance;
+                case HorizontalPosition.Right:
+                    position -= Vector3.Cross(pathDirection, Vector3.up) * HorizontalPositionOffset.Right;
                     break;
                 default:
                     break;
