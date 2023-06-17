@@ -16,14 +16,34 @@ public class BallPath : MonoBehaviour
         Vector3 position = pathCreator.path.GetPointAtDistance(distanceTravelled);
         Vector3 pathDirection = pathCreator.path.GetDirectionAtDistance(distanceTravelled);
         position.y += 0.1f;
+        
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition > HorizontalPosition.Left)
+        if (Input.touchCount > 0)
         {
-            currentPosition--;
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                Vector2 touchPosition = touch.position;
+                if (touchPosition.x < Screen.width / 2)
+                {
+                    currentPosition++;
+                }
+                else
+                {
+                    currentPosition--;
+                }
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition < HorizontalPosition.Right)
+        else
         {
-            currentPosition++;
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition > HorizontalPosition.Left)
+            {
+                currentPosition--;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition < HorizontalPosition.Right)
+            {
+                currentPosition++;
+            }
         }
 
         Vector3 targetPosition = position;
